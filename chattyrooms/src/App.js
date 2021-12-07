@@ -1,13 +1,10 @@
-
 import React, { useState, useEffect } from "react";
-import {Route, Routes} from "react-router-dom"
-import {Button} from "@chakra-ui/button"
-import io from 'socket.io-client'
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import { Button } from "@chakra-ui/button";
+import io from "socket.io-client";
+import "./App.css";
 import Homepage from "./Pages/Homepage";
 import Chatpage from "./Pages/Chatpage";
-
-
 
 let socket;
 const CONNECTION_PORT = "localhost:3002/";
@@ -31,7 +28,7 @@ function App() {
       setMessageList([...messageList, data]);
     });
   });
-  
+
   const connectToRoom = () => {
     setLoggedIn(true);
     socket.emit("join_room", room);
@@ -53,10 +50,10 @@ function App() {
 
   return (
     <div className="App">
-    <Routes>
+      <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/chats" element={<Chatpage />} />
-    </Routes>
+      </Routes>
 
       {!loggedIn ? (
         <div className="logIn">
