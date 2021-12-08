@@ -58,7 +58,7 @@ import {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const  {data}  = await axios.get(`http://localhost:3001/api/user?search=${search}`, config);
+        const  {data}  = await axios.get(`https://chatty-rooms-backend.herokuapp.com/api/user?search=${search}`, config);
         console.log(data);
 
         setLoading(false);
@@ -98,7 +98,7 @@ import {
           },
         };
         const { data } = await axios.post(
-          `http://localhost:3001/api/chat/group`,
+          `https://chatty-rooms-backend.herokuapp.com/api/chat/group`,
           {
             name: groupChatName,
             users: JSON.stringify(selectedUsers.map((u) => u._id)),
