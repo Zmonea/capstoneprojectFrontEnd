@@ -16,7 +16,7 @@ import {
   import axios from "axios";
   import { useState } from "react";
   import { ChatState } from "../Context/ChatProvider";
-  //import UserBadgeItem from "../userAvatar/UserBadgeItem";
+  import UserBadgeItem from "./userAvatar/UserBadgeItem";
   import UserListItem from "./userAvatar/UserListItem.js";
   
   const GroupChatModal = ({ children }) => {
@@ -60,6 +60,7 @@ import {
         };
         const  {data}  = await axios.get(`http://localhost:3001/api/user?search=${search}`, config);
         console.log(data);
+
         setLoading(false);
         setSearchResult(data);
       } catch (error) {
@@ -116,7 +117,6 @@ import {
       } catch (error) {
         toast({
           title: "Failed to Create the Chat!",
-          //description: error.response.data,
           status: "error",
           duration: 5000,
           isClosable: true,
@@ -124,7 +124,7 @@ import {
         });
       }
     };
-  
+    console.log(selectedUsers)
     return (
       <>
         <span onClick={onOpen}>{children}</span>
@@ -151,19 +151,20 @@ import {
               </FormControl>
               <FormControl>
                 <Input
-                  placeholder="Add Users ex: Hare, Test, Zac"
+                  placeholder="Add Users ex: Hare, Test, Bobby"
                   mb={1}
                   onChange={(e) => handleSearch(e.target.value)}
                 />
               </FormControl>
+              
               <Box w="100%" d="flex" flexWrap="wrap">
-                {/* {selectedUsers.map((u) => (
+                {selectedUsers.map((u) => (
                   <UserBadgeItem
                     key={u._id}
                     user={u}
                     handleFunction={() => handleDelete(u)}
                   />
-                ))} */}
+                ))}
               </Box>
               
 

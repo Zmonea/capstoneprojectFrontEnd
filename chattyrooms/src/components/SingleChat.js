@@ -1,17 +1,14 @@
 import { FormControl } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
-import { Box, Text } from "@chakra-ui/layout";
+import { Box, Text } from "@chakra-ui/react";
 //import "./styles.css";
 import { IconButton, Spinner, useToast } from "@chakra-ui/react";
 import { getSender, getSenderFull } from "../config/ChatLogics";
 import { useEffect, useState } from "react";
 import axios from "axios";
-//import { ArrowBackIcon } from "@chakra-ui/icons";
+
 //import ProfileModal from "./miscellaneous/ProfileModal";
 import ScrollableChat from "./ScrollableChat";
-//import Lottie from "react-lottie";
-//import animationData from "../animations/typing.json";
-
 
 import io from "socket.io-client";
 //import UpdateGroupChatModal from "./UpdateGroupChatModal";
@@ -28,14 +25,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [istyping, setIsTyping] = useState(false);
   const toast = useToast();
 
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    //animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
+  
 
   const { selectedChat, setSelectedChat, user, notification, setNotification } =
     ChatState();
@@ -56,6 +46,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         `http://localhost:3001/api/message/${selectedChat._id}`,
         config
       );
+      console.log(data);
       setMessages(data);
       setLoading(false);
 
@@ -107,7 +98,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   };
 
   useEffect(() => {
-    socket = io(ENDPOINT);
+    socket = io(
+      ENDPOINT
+      // {transports:['websocket', 'polling','flashsocket']}
+    );
     socket.emit("setup", user);
     socket.on("connected", () => setSocketConnected(true));
     socket.on("typing", () => setIsTyping(true));
@@ -176,13 +170,14 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           >
             <IconButton
               d={{ base: "flex", md: "none" }}
-            //   icon={<ArrowBackIcon />}
+             
               onClick={() => setSelectedChat("")}
             />
             {messages &&
               (!selectedChat.isGroupChat ? (
                 <>
                   {getSender(user, selectedChat.users)}
+                  
                   {/* <ProfileModal
                     user={getSenderFull(user, selectedChat.users)}
                   /> */}
@@ -229,14 +224,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               isRequired
               mt={3}
             >
-              {istyping ? (
-                <div>
-                
-                  typing...
-                </div>
-              ) : (
-                <></>
-              )}
+              {istyping ? <div>typing...</div> : <></>}
               <Input
                 variant="filled"
                 bg="#E0E0E0"

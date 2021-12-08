@@ -1,52 +1,53 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Button } from "@chakra-ui/button";
+
 import io from "socket.io-client";
 import "./App.css";
 import Homepage from "./Pages/Homepage";
 import Chatpage from "./Pages/Chatpage";
 
-let socket;
-const CONNECTION_PORT = "localhost:3002/";
 
 function App() {
-  // Before Login
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [room, setRoom] = useState("");
-  const [userName, setUserName] = useState("");
+  // // Before Login
+  // const [loggedIn, setLoggedIn] = useState(false);
+  // const [room, setRoom] = useState("");
+  // const [userName, setUserName] = useState("");
 
-  // After Login
-  const [message, setMessage] = useState("");
-  const [messageList, setMessageList] = useState([]);
+  // // After Login
+  // const [message, setMessage] = useState("");
+  // const [messageList, setMessageList] = useState([]);
 
-  useEffect(() => {
-    socket = io(CONNECTION_PORT);
-  }, [CONNECTION_PORT]);
+  // useEffect(() => {
+  //   socket = io(CONNECTION_PORT, {
+  //     withCredentials: true,
+      
+  //   });
+  // }, [CONNECTION_PORT]);
 
-  useEffect(() => {
-    socket.on("receive_message", (data) => {
-      setMessageList([...messageList, data]);
-    });
-  });
+  // useEffect(() => {
+  //   socket.on("receive_message", (data) => {
+  //     setMessageList([...messageList, data]);
+  //   });
+  // });
 
-  const connectToRoom = () => {
-    setLoggedIn(true);
-    socket.emit("join_room", room);
-  };
+  // const connectToRoom = () => {
+  //   setLoggedIn(true);
+  //   socket.emit("join_room", room);
+  // };
 
-  const sendMessage = async () => {
-    let messageContent = {
-      room: room,
-      content: {
-        author: userName,
-        message: message,
-      },
-    };
+  // const sendMessage = async () => {
+  //   let messageContent = {
+  //     room: room,
+  //     content: {
+  //       author: userName,
+  //       message: message,
+  //     },
+  //   };
 
-    await socket.emit("send_message", messageContent);
-    setMessageList([...messageList, messageContent.content]);
-    setMessage("");
-  };
+  //   await socket.emit("send_message", messageContent);
+  //   setMessageList([...messageList, messageContent.content]);
+  //   setMessage("");
+  // };
 
   return (
     <div className="App">
@@ -55,7 +56,7 @@ function App() {
         <Route path="/chats" element={<Chatpage />} />
       </Routes>
 
-      {!loggedIn ? (
+      {/* {!loggedIn ? (
         <div className="logIn">
           <div className="inputs">
             <input
@@ -103,7 +104,7 @@ function App() {
             <button onClick={sendMessage}>Send</button>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
