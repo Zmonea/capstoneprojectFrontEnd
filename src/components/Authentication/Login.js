@@ -40,7 +40,7 @@ const Login = () => {
       };
 
       const { data } = await axios.post(
-        "https://chatty-rooms-backend.herokuapp.com/api/user/login",
+        "https://chattybackrooms.onrender.com/api/user/login",
         { email, password },
         config
       );

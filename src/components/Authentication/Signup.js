@@ -51,7 +51,7 @@ const Signup = () => {
         },
       };
       const { data } = await axios.post(
-        "https://chatty-rooms-backend.herokuapp.com/api/user", //localhost:3001
+        "https://chattybackrooms.onrender.com/api/user", //localhost:3001
         {
           name,
           email,

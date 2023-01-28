@@ -13,7 +13,7 @@ import ScrollableChat from "./ScrollableChat";
 import io from "socket.io-client";
 //import UpdateGroupChatModal from "./UpdateGroupChatModal";
 import { ChatState } from "../Context/ChatProvider";
-const ENDPOINT = "https://chatty-rooms-backend.herokuapp.com"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
+const ENDPOINT = "https://chattybackrooms.onrender.com/";  // change from Heroku deployment to Render
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -43,7 +43,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setLoading(true);
 
       const { data } = await axios.get(
-        `https://chatty-rooms-backend.herokuapp.com/api/message/${selectedChat._id}`,
+        `https://chattybackrooms.onrender.com/api/message/${selectedChat._id}`,
         config
       ); //
       console.log(data);
@@ -75,7 +75,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
         setNewMessage("");
         const { data } = await axios.post(
-          "https://chatty-rooms-backend.herokuapp.com/api/message",
+          "https://chattybackrooms.onrender.com/api/message",
           {
             content: newMessage,
             chatId: selectedChat,
