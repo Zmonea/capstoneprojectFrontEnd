@@ -13,7 +13,7 @@ import ScrollableChat from "./ScrollableChat";
 import io from "socket.io-client";
 //import UpdateGroupChatModal from "./UpdateGroupChatModal";
 import { ChatState } from "../Context/ChatProvider";
-const ENDPOINT = "https://chattybackrooms.onrender.com/";  // change from Heroku deployment to Render
+const ENDPOINT = "https://chattybackrooms.onrender.com/";  // changed from Heroku deployment to Render
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
